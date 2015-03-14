@@ -228,7 +228,7 @@ var VeggieFactory = (function(){
 		},
 		randomSet: function(n){
 			var veggies = [];
-			var n = n || Math.floor(Math.random() * 0) + 1; //no more than 6 at once
+			var n = n || Math.floor(Math.random() * 5) + 1; //no more than 6 at once
 			for(var i=0; i<n; i++){
 				veggies.push(this.random());
 			}

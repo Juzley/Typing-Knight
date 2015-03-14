@@ -82,7 +82,7 @@ var Stage = function(canvas,veggieImg,width,height,bgImg){
 
             // If the current target has gone off the screen, need to reset
             // the target
-            if (this.target != null && !veggieOffStage(this.target)) {
+            if (this.target != null && veggieOffStage(this.target)) {
                 this.target = null;
             }
 

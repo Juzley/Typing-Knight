@@ -1,10 +1,11 @@
-function Veggie(type,sprite,whole){
+function Veggie(type,sprite,whole,text){
 	this.type = type;
 	this.pos = {x:0,y:0};
 	this.vel = {x:0,y:0};
 	this.rot = 0;
 	this.rotVel = 0;
 	this.whole = whole;
+    this.text = text;
 	this.draw = function(img, ctx, scaleFactor){
 		ctx.save();
 		ctx.translate(this.pos.x, this.pos.y);
@@ -20,6 +21,9 @@ function Veggie(type,sprite,whole){
 			scaleFactor * sprite.w,
 			scaleFactor * sprite.h);
 		ctx.restore();
+        if (this.whole) {
+            ctx.fillText(this.text, this.pos.x, this.pos.y)
+        }
 	}
 	this.containsPoint = function(x,y,scaleFactor){
 		var x1 = this.pos.x + scaleFactor * sprite.w/-2;
@@ -43,7 +47,7 @@ function Veggie(type,sprite,whole){
 		return function(){
 			if(_veggies == null){
 				_veggies = sprite.splits.map(function(splitSprite){
-					return new Veggie(self.type, splitSprite, false);
+					return new Veggie(self.type, splitSprite, false, '');
 				});
 			}
 			return _veggies;

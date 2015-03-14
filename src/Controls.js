@@ -29,6 +29,30 @@ var Controls = function(canvas,stage,gameLoop){
 			ob.apply(null,args);
 		});
 	}
+    function onType(self, char) {
+        if (!stage) {
+            return;
+        }
+
+        if (stage.target == null) {
+            // Find a new target
+            stage.veggies.forEach(function(veggie) {
+                if (veggie.whole && veggie.text[0] == char) {
+                    stage.target = veggie;
+                }
+            });
+        }
+
+        if (stage.target != null && stage.target.text[0] == char) {
+            stage.target.text = stage.target.text.substring(1);
+
+            if (stage.target.text.length == 0) {
+                stage.splitVeggie(stage.target);
+				notifyObs('slice', stage.target.type);
+                stage.target = null;
+            }
+        }
+    }
 	function setupCombos(self){
 		SwipeEvents(canvas);
 		var swipedVeggies = [];
@@ -83,9 +107,10 @@ var Controls = function(canvas,stage,gameLoop){
 						gameLoop.playPause();
 					}
 				}
+                onType(this, String.fromCharCode(e.which).toLowerCase())
 			});
 			if(!!stage){
-				setupCombos(this);
+				//setupCombos(this);
 			}
 		},
 		on: function(evnts,fn){

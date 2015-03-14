@@ -1,7 +1,10 @@
-Veggie Knight is a simple clone of the popular fruit-slicing game Fruit Ninja.
+This is Typing Ninja, a fork of Veggie-Knight
+(http://jonashw.github.io/Veggie-Knight/) for the 2015 GitHub Game-Off.
 
-The graphics are hand-drawn and the gameplay is basic.
+Typing Ninja is like Veggie Knight (which is a clone of the popular
+fruit-slicing game Fruit Ninja) except that instead of swiping with your
+mouse to slice the veggies, you slice them by typing.
 
 Runs in your browser; requires JavaScript and HTML5 (Canvas).
 
-Play it here: http://jonashw.github.io/Veggie-Knight/
+Play it here: http://juzley.github.io/Veggie-Knight/

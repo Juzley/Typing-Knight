@@ -22,7 +22,7 @@ var Stage = function(canvas,veggieImg,width,height,bgImg){
 		};
 	})();
 	function veggieOffStage(veggie){
-		return veggie.pos.y < _ctx.canvas.height + 100;
+		return veggie.pos.y > _ctx.canvas.height + 100;
 	}
 	function clear(){
 		_ctx.clearRect(0,0, _ctx.canvas.width, _ctx.canvas.height);
@@ -62,6 +62,7 @@ var Stage = function(canvas,veggieImg,width,height,bgImg){
 		veggies: [],
 		swipeTrail:[],
 		notices: [],
+        target: null,
 		score: null,
 		getHeight: function(){
 			return _ctx.canvas.height;
@@ -78,9 +79,16 @@ var Stage = function(canvas,veggieImg,width,height,bgImg){
 			this.veggies.forEach(function(veggie,i){
 				veggie.draw(_img, _ctx, _scaleFactor);
 			});
+
+            // If the current target has gone off the screen, need to reset
+            // the target
+            if (this.target != null && !veggieOffStage(this.target)) {
+                this.target = null;
+            }
+
 			//remove veggies that have left the stage
 			this.veggies = this.veggies.filter(function(veggie){
-				return veggieOffStage(veggie);
+                return !veggieOffStage(veggie);
 			});
 			_ctx.save();
 			_ctx.strokeStyle = 'rgba(0,0,0,0.25)';//'rgba(15,175,15,0.5)';

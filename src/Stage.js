@@ -76,8 +76,10 @@ var Stage = function(canvas,veggieImg,width,height,bgImg){
 		draw: function(){
 			clear();
 			drawBg();
+            self = this;
 			this.veggies.forEach(function(veggie,i){
-				veggie.draw(_img, _ctx, _scaleFactor);
+				veggie.draw(_img, _ctx, _scaleFactor,
+                            self.target === veggie);
 			});
 
             // If the current target has gone off the screen, need to reset

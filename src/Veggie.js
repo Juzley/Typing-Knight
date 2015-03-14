@@ -6,7 +6,7 @@ function Veggie(type,sprite,whole,text){
 	this.rotVel = 0;
 	this.whole = whole;
     this.text = text;
-	this.draw = function(img, ctx, scaleFactor){
+	this.draw = function(img, ctx, scaleFactor, highlight){
 		ctx.save();
 		ctx.translate(this.pos.x, this.pos.y);
 		ctx.rotate(Convert.degToRad(this.rot));
@@ -21,8 +21,17 @@ function Veggie(type,sprite,whole,text){
 			scaleFactor * sprite.w,
 			scaleFactor * sprite.h);
 		ctx.restore();
+
         if (this.whole) {
-            ctx.fillText(this.text, this.pos.x, this.pos.y)
+            ctx.textAlign = 'center';
+            ctx.font = '20px Verdana';
+
+            if (highlight) {
+                ctx.fillStyle = '#FF0000';
+            } else {
+                ctx.fillStyle = '#FFA500';
+            }
+            ctx.fillText(this.text, this.pos.x, this.pos.y);
         }
 	}
 	this.containsPoint = function(x,y,scaleFactor){

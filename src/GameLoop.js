@@ -1,24 +1,24 @@
 var GameLoop = function(stage){
     var _GAME_TIME = 1 * 60 * 1000;
     var _time = _GAME_TIME;
-	var _interval;
-	var _obs = {
-		start:[],
-		stop:[]
-	};
-	function notify(evnt){
-		_obs[evnt].forEach(function(fn){
-			fn();
-		});
-	}
-	return {
-		isRunning: function(){
-			return !!_interval;
-		},
-		start: function(){
-			if(this.isRunning()){
-				return;
-			}
+    var _interval;
+    var _obs = {
+        start:[],
+        stop:[]
+    };
+    function notify(evnt){
+        _obs[evnt].forEach(function(fn){
+            fn();
+        });
+    }
+    return {
+        isRunning: function(){
+            return !!_interval;
+        },
+        start: function(){
+            if(this.isRunning()){
+                return;
+            }
 
             if (_time == 0) {
                 // Start a new game
@@ -38,23 +38,23 @@ var GameLoop = function(stage){
                 }
             };
             _loop();
-			_interval = setInterval(_loop, 20);
-			notify('start');
-		},
-		stop: function(){
-			clearInterval(_interval);
-			_interval = null;
-			notify('stop');
-		},
-		playPause: function(){
-			if(this.isRunning()){
-				this.stop();
-			} else {
-				this.start();
-			}
-		},
-		on: function(evnt,fn){
-			_obs[evnt].push(fn);
-		}
-	};
+            _interval = setInterval(_loop, 20);
+            notify('start');
+        },
+        stop: function(){
+            clearInterval(_interval);
+            _interval = null;
+            notify('stop');
+        },
+        playPause: function(){
+            if(this.isRunning()){
+                this.stop();
+            } else {
+                this.start();
+            }
+        },
+        on: function(evnt,fn){
+            _obs[evnt].push(fn);
+        }
+    };
 };

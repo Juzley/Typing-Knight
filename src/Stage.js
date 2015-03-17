@@ -73,7 +73,7 @@ var Stage = function(canvas,veggieImg,width,height,bgImg){
 		getCanvas: function(){
 			return canvas;
 		},
-		draw: function(){
+		draw: function(time){
 			clear();
 			drawBg();
             self = this;
@@ -111,6 +111,9 @@ var Stage = function(canvas,veggieImg,width,height,bgImg){
 				var scoreX = canvas.width - (digits * 25) - 8;
 				_ctx.fillText(this.score, scoreX, 40);
 			}
+
+            _ctx.fillText(time, canvas.width / 2, 40);
+
 			_ctx.restore();
 		},
 		update: function(){

@@ -1,9 +1,7 @@
 var GameLoop = function(stage){
+    var _GAME_TIME = 1 * 60 * 1000;
+    var _time = _GAME_TIME;
 	var _interval;
-	var _loop = function(){
-		stage.update();
-		stage.draw();
-	};
 	var _obs = {
 		start:[],
 		stop:[]
@@ -21,8 +19,26 @@ var GameLoop = function(stage){
 			if(this.isRunning()){
 				return;
 			}
-			_loop();
-			_interval = setInterval(_loop,20);
+
+            if (_time == 0) {
+                // Start a new game
+                _time = _GAME_TIME;
+                stage.veggies.length = 0;
+                stage.score = 0;
+            }
+
+            self = this;
+            _loop = function() {
+                stage.update();
+                stage.draw(Math.round(_time / 1000));
+                _time -= 20;
+                if (_time <= 0) {
+                    _time = 0;
+                    self.stop();
+                }
+            };
+            _loop();
+			_interval = setInterval(_loop, 20);
 			notify('start');
 		},
 		stop: function(){
